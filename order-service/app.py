@@ -20,6 +20,7 @@ def get_connection():
         password=DB_PASSWORD
     )
 
+#create an order table 
 def initialize_database():
     for attempt in range(15):
         try:

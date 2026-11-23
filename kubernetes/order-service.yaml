@@ -21,11 +21,8 @@ spec:
       containers:
 
         - name: order-service
-
           image: ecommerce-order:v1
-
           imagePullPolicy: Never
-
           ports:
             - containerPort: 5002
 
@@ -51,6 +48,13 @@ spec:
                 secretKeyRef:
                   name: database-secret
                   key: POSTGRES_PASSWORD
+
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 5002
+            periodSeconds: 5
+            failureThreshold: 30
 
           readinessProbe:
             httpGet:
